@@ -1,2 +1,10 @@
-# S2S-Streamflow-Forecasting
-This project contains data and codes related to paper on skill of extended range streamflow in forecasting non-extreme conditions for water management (Godavari Basin)
+This folder contains the input datasets (.csv files), codes (Python and MATLAB), and the output files (.png files and .csv files):
+1. The Godavari_PIML_LSTM_Code.py code consists of a Process Informed Machine Learning (PIML) model setup and a standalone Long Short Term Memory (LSTM) setup to simulate streamflow (from CWC) from input datasets: basin-averaged rainfall and temperature from IMD.
+   The PIML model is developed using Support Vector Regression(SVR) to predict excess rainfall from rainfall and temperature, and LSTM models to predict quickflow and slowflow from rainfall, temperature, and SVM-simulated excess rainfall.
+   The standalone LSTM model is used to predict streamflow from rainfall and temperature datasets.
+   The datasets are split into 70% training and 30% testing randomly. The input datasets are scaled using standard scaling in the training and testing phases separately to avoid data leakage.
+   The performance of the models is evaluated using the NSE, KGE, and correlation coefficients.
+2. The ihacres.m code consists of the function code of the IHACRES conceptual lumped model setup in MATLAB to predict streamflow from rainfall and temperature.
+3. The PVM_Godavari_IHACRES.m consists of the calibration and validation part of IHACRES using 3-fold cross-validation to improve the model performance. The parameters providing the best performance in the three iterations are selected for further computation.
+4. The Godavari_S2S_forecasting_Code.py consists of forecasting the streamflow using forecasted subseasonal to seasonal(S2S) rainfall and climatological temperature using PIML, standalone LSTM, and IHACRES. The IHACRES model in PVM_S2S_forecast.m is executed using the following Python code.
+5. The Godavari_S2S_Skill.py code deals with the skill evaluation of S2S rainfall and streamflow forecasts using ROC(Receiver Operating Characteristic curve) curves, AUC (Area Under Curve) value, and AUC skill score with respect to climatological forecasts and leadtime. 
