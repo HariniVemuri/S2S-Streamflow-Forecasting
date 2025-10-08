@@ -27,9 +27,8 @@ y = df_Final['ER'].values
 
 # Assuming X and y are your input features (rainfall and temperature) and target variable (streamflow)
 # Split the data into calibration and validation sets
-h = round(0.7*len(X))
-X_train, y_train = X[:h], y[:h]
-X_test, y_test = X[h:] , y[h:]
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.3, random_state=42)
 
 ## Preprocess Data ###
 scaler = StandardScaler()
